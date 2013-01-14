@@ -1,0 +1,10 @@
+{% if app.session.flashBag.peekAll %}
+
+    <div id="flash">
+        {% for key, flash in app.session.getFlashes() %}
+            <div class="alert alert-{{ flash }} flash">
+                <span>{{ key | trans }}</span>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

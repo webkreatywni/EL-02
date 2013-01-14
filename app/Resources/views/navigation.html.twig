@@ -1,0 +1,16 @@
+{% block navigation %}
+    <div class="navbar">
+        <div class="navbar-inner">
+            {% if navigation is not null %}
+                <ul class="nav">
+                    {% for pill in navigation %}
+                        <li class="{{ pill.active ? 'active' : '' }}">
+                            <a href="{{ pill.url|default('#') }}">{{ pill.name | trans }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <div class="pull-right"><span class="brand" style="font-size: 11px;">{{ 'logged.as' | trans }} <span style="font-weight: bold">{{ app.user.email }}</span></span><a class="btn pull-right" href="{{ path('fos_user_security_logout') }}">{{ 'logout' | trans }}</a></div>
+        </div>
+    </div>
+{% endblock navigation %}

@@ -1,6 +1,4 @@
 
-otstrap
-app/bootstrap*
 
 # Composer lock
 composer.lock

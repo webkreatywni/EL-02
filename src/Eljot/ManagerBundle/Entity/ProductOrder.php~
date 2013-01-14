@@ -1,0 +1,432 @@
+<?php
+
+namespace Eljot\ManagerBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Eljot\ManagerBundle\Entity\ProductOrder
+ */
+class ProductOrder
+{
+    /**
+     * @var integer $id
+     */
+    private $id;
+
+    /**
+     * @var string $model
+     */
+    private $model;
+
+    /**
+     * @var string $invoice
+     */
+    private $invoice;
+
+    /**
+     * @var string $ebay
+     */
+    private $ebay;
+
+    /**
+     * @var string $color
+     */
+    private $color;
+
+    /**
+     * @var boolean $is_seat
+     */
+    private $is_seat;
+
+    /**
+     * @var string $frame
+     */
+    private $frame;
+
+    /**
+     * @var text $extra
+     */
+    private $extra;
+
+    /**
+     * @var string $wheels
+     */
+    private $wheels;
+
+    /**
+     * @var string $client
+     */
+    private $client;
+
+    /**
+     * @var date $date_of_receipt
+     */
+    private $date_of_receipt;
+
+    /**
+     * @var date $date_of_payment
+     */
+    private $date_of_payment;
+
+    /**
+     * @var time $update_time
+     */
+    private $update_time;
+
+    /**
+     * @var time $insert_time
+     */
+    private $insert_time;
+
+    /**
+     * @var boolean $ready_to_receipt
+     */
+    private $ready_to_receipt;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set model
+     *
+     * @param string $model
+     * @return ProductOrder
+     */
+    public function setModel($model)
+    {
+        $this->model = $model;
+        return $this;
+    }
+
+    /**
+     * Get model
+     *
+     * @return string 
+     */
+    public function getModel()
+    {
+        return $this->model;
+    }
+
+    /**
+     * Set invoice
+     *
+     * @param string $invoice
+     * @return ProductOrder
+     */
+    public function setInvoice($invoice)
+    {
+        $this->invoice = $invoice;
+        return $this;
+    }
+
+    /**
+     * Get invoice
+     *
+     * @return string 
+     */
+    public function getInvoice()
+    {
+        return $this->invoice;
+    }
+
+    /**
+     * Set ebay
+     *
+     * @param string $ebay
+     * @return ProductOrder
+     */
+    public function setEbay($ebay)
+    {
+        $this->ebay = $ebay;
+        return $this;
+    }
+
+    /**
+     * Get ebay
+     *
+     * @return string 
+     */
+    public function getEbay()
+    {
+        return $this->ebay;
+    }
+
+    /**
+     * Set color
+     *
+     * @param string $color
+     * @return ProductOrder
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+        return $this;
+    }
+
+    /**
+     * Get color
+     *
+     * @return string 
+     */
+    public function getColor()
+    {
+        return $this->color;
+    }
+
+    /**
+     * Set is_seat
+     *
+     * @param boolean $isSeat
+     * @return ProductOrder
+     */
+    public function setIsSeat($isSeat)
+    {
+        $this->is_seat = $isSeat;
+        return $this;
+    }
+
+    /**
+     * Get is_seat
+     *
+     * @return boolean 
+     */
+    public function getIsSeat()
+    {
+        return $this->is_seat;
+    }
+
+    /**
+     * Set frame
+     *
+     * @param string $frame
+     * @return ProductOrder
+     */
+    public function setFrame($frame)
+    {
+        $this->frame = $frame;
+        return $this;
+    }
+
+    /**
+     * Get frame
+     *
+     * @return string 
+     */
+    public function getFrame()
+    {
+        return $this->frame;
+    }
+
+    /**
+     * Set extra
+     *
+     * @param text $extra
+     * @return ProductOrder
+     */
+    public function setExtra($extra)
+    {
+        $this->extra = $extra;
+        return $this;
+    }
+
+    /**
+     * Get extra
+     *
+     * @return text 
+     */
+    public function getExtra()
+    {
+        return $this->extra;
+    }
+
+    /**
+     * Set wheels
+     *
+     * @param string $wheels
+     * @return ProductOrder
+     */
+    public function setWheels($wheels)
+    {
+        $this->wheels = $wheels;
+        return $this;
+    }
+
+    /**
+     * Get wheels
+     *
+     * @return string 
+     */
+    public function getWheels()
+    {
+        return $this->wheels;
+    }
+
+    /**
+     * Set client
+     *
+     * @param string $client
+     * @return ProductOrder
+     */
+    public function setClient($client)
+    {
+        $this->client = $client;
+        return $this;
+    }
+
+    /**
+     * Get client
+     *
+     * @return string 
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * Set date_of_receipt
+     *
+     * @param date $dateOfReceipt
+     * @return ProductOrder
+     */
+    public function setDateOfReceipt($dateOfReceipt)
+    {
+        $this->date_of_receipt = $dateOfReceipt;
+        return $this;
+    }
+
+    /**
+     * Get date_of_receipt
+     *
+     * @return date 
+     */
+    public function getDateOfReceipt()
+    {
+        return $this->date_of_receipt;
+    }
+
+    /**
+     * Set date_of_payment
+     *
+     * @param date $dateOfPayment
+     * @return ProductOrder
+     */
+    public function setDateOfPayment($dateOfPayment)
+    {
+        $this->date_of_payment = $dateOfPayment;
+        return $this;
+    }
+
+    /**
+     * Get date_of_payment
+     *
+     * @return date 
+     */
+    public function getDateOfPayment()
+    {
+        return $this->date_of_payment;
+    }
+
+    /**
+     * Set update_time
+     *
+     * @param time $updateTime
+     * @return ProductOrder
+     */
+    public function setUpdateTime($updateTime)
+    {
+        $this->update_time = $updateTime;
+        return $this;
+    }
+
+    /**
+     * Get update_time
+     *
+     * @return time 
+     */
+    public function getUpdateTime()
+    {
+        return $this->update_time;
+    }
+
+    /**
+     * Set insert_time
+     *
+     * @param time $insertTime
+     * @return ProductOrder
+     */
+    public function setInsertTime($insertTime)
+    {
+        $this->insert_time = $insertTime;
+        return $this;
+    }
+
+    /**
+     * Get insert_time
+     *
+     * @return time 
+     */
+    public function getInsertTime()
+    {
+        return $this->insert_time;
+    }
+
+    /**
+     * Set ready_to_receipt
+     *
+     * @param boolean $readyToReceipt
+     * @return ProductOrder
+     */
+    public function setReadyToReceipt($readyToReceipt)
+    {
+        $this->ready_to_receipt = $readyToReceipt;
+        return $this;
+    }
+
+    /**
+     * Get ready_to_receipt
+     *
+     * @return boolean 
+     */
+    public function getReadyToReceipt()
+    {
+        return $this->ready_to_receipt;
+    }
+    /**
+     * @var string $unique_code
+     */
+    private $unique_code;
+
+
+    /**
+     * Set unique_code
+     *
+     * @param string $uniqueCode
+     * @return ProductOrder
+     */
+    public function setUniqueCode($uniqueCode)
+    {
+        $this->unique_code = $uniqueCode;
+        return $this;
+    }
+
+    /**
+     * Get unique_code
+     *
+     * @return string 
+     */
+    public function getUniqueCode()
+    {
+        return $this->unique_code;
+    }
+}

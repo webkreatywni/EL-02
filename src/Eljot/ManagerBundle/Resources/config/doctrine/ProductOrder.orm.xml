@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity repository-class="Eljot\ManagerBundle\Entity\ProductOrderRepository" name="Eljot\ManagerBundle\Entity\ProductOrder" table="product_order">
+    <change-tracking-policy>DEFERRED_IMPLICIT</change-tracking-policy>
+    <id name="id" type="integer" column="id">
+      <generator strategy="AUTO"/>
+    </id>
+    <field name="uniqueCode" type="string" column="unique_code" length="255"/>
+    <field name="model" type="string" column="model" length="255"/>
+    <field name="invoice" type="string" column="invoice" length="255"/>
+    <field name="ebay" type="string" column="ebay" length="255"/>
+    <field name="color" type="string" column="color" length="255"/>
+    <field name="isSeat" type="boolean" column="is_seat"/>
+    <field name="frame" type="string" column="frame" length="255"/>
+    <field name="extra" type="text" column="extra"/>
+    <field name="wheels" type="string" column="wheels" length="255"/>
+    <field name="client" type="string" column="client" length="255"/>
+    <field name="dateOfReceipt" type="date" column="date_of_receipt"/>
+    <field name="dateOfPayment" type="date" column="date_of_payment"/>
+    <field name="updateTime" type="datetime" column="update_time"/>
+    <field name="insertTime" type="datetime" column="insert_time"/>
+    <field name="readyToReceipt" type="boolean" column="ready_to_receipt"/>
+    <lifecycle-callbacks/>
+  </entity>
+</doctrine-mapping>

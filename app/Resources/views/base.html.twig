@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        {% block stylesheets %}
+            {% include 'BraincraftedBootstrapBundle::_stylesheets.html.twig' %}
+
+            {% stylesheets '../app/Resources/public/css/*' %}
+                <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock stylesheets %}
+
+        {% block head_javascripts %}
+            {% javascripts '../app/Resources/public/js/*' %}
+                <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock head_javascripts %}
+    </head>
+    <body>
+
+        <div class="container-fluid">
+            {% block body %}{% endblock %}
+        </div>
+
+        {% block javascripts %}
+            {% include 'BraincraftedBootstrapBundle::_javascripts.html.twig' %}
+        {% endblock javascripts %}
+    </body>
+</html>

@@ -1,0 +1,33 @@
+.grid .grid_body{
+    font-size: 11px;
+}
+.grid .grid_body table td,
+.grid .grid_body table th,
+.grid .grid_body table input,
+.grid .grid_body table select
+{
+    font-size: 11px;
+    padding: 3px;
+}
+.grid .grid_body .pager{
+    width: 450px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.grid .grid_body table th,
+.grid .grid_body table td{
+}
+
+.grid-reset,
+.grid-column-__actions,
+.grid-column-__actions .btn{
+    width: 60px;
+}
+
+.icon-ok.grid_boolean_true,
+.icon-remove.grid_boolean_false{
+    text-indent: -9999px;
+    display: block;
+    margin: 0 auto;
+}

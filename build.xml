@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Symfony2 project" default="build">
+
+    <!-- Properties -->
+
+    <property name="parameters" value="${basedir}/app/config/parameters.yml"/>
+    <property name="codedir" value="${basedir}/src"/>
+    <property name="standards_dir" value="${basedir}/standards" />
+    <property name="symfony2_cs_ruleset" value="${standards_dir}/Symfony2" />
+    <property name="phpmd_ruleset" value="${standards_dir}/PHPMessDetector/ruleset.xml" />
+
+    <!-- Macros -->
+
+    <macrodef name="git">
+        <attribute name="command" />
+        <attribute name="dir" default="" />
+        <element name="args" optional="true" />
+        <sequential>
+            <echo message="git @{command}" />
+            <exec executable="git" dir="@{dir}" failonerror="true">
+                <arg value="@{command}" />
+                <args/>
+            </exec>
+        </sequential>
+    </macrodef>
+
+    <!-- Simple tasks -->
+
+    <target name="check-parameters" description="Check if parameters.yml exists.">
+        <fail message="Missing required configuration file '${parameters}'.">
+            <condition>
+                <not>
+                    <available file="${parameters}" />
+                </not>
+            </condition>
+        </fail>
+    </target>
+
+    <target name="prepare" depends="clean" description="Prepare directories for build data.">
+        <mkdir dir="${basedir}/build/api"/>
+        <mkdir dir="${basedir}/build/code-browser"/>
+        <mkdir dir="${basedir}/build/coverage"/>
+        <mkdir dir="${basedir}/build/logs"/>
+        <mkdir dir="${basedir}/build/pdepend"/>
+    </target>
+
+    <target name="clean" description="Remove build data.">
+        <delete dir="${basedir}/build/api"/>
+        <delete dir="${basedir}/build/code-browser"/>
+        <delete dir="${basedir}/build/coverage"/>
+        <delete dir="${basedir}/build/logs"/>
+        <delete dir="${basedir}/build/pdepend"/>
+    </target>
+
+    <target name="copy-parameters" description="Copy parameters.yml.dist to parameters.yml if the latter is missing.">
+        <copy file="${parameters}.dist" tofile="${parameters}" overwrite="false"/>
+    </target>
+
+    <target name="lint" description="Run PHP lint on all *.php files in code directory.">
+        <apply executable="php" failonerror="true">
+            <arg value="-l" />
+            <fileset dir="${codedir}">
+                <include name="**/*.php" />
+                <modified />
+            </fileset>
+            <fileset dir="${codedir}">
+                <include name="**/*.php" />
+                <modified />
+            </fileset>
+        </apply>
+    </target>
+
+    <target name="phploc" description="Measure project size using PHPLOC.">
+        <exec executable="phploc">
+            <arg value="--log-csv" />
+            <arg value="${basedir}/build/logs/phploc.csv" />
+            <arg path="${codedir}" />
+        </exec>
+    </target>
+
+    <target name="pdepend" description="Calculate software metrics using PHP_Depend and create a log file for the CI server.">
+        <exec executable="${basedir}/vendor/pdepend/pdepend/src/bin/pdepend">
+            <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
+            <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
+            <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
+            <arg path="${codedir}" />
+        </exec>
+    </target>
+
+    <target name="phpmd" description="Perform project mess detection using PHPMD and create a log file for the CI server.">
+        <exec executable="${basedir}/vendor/xsolve-pl/phpmd/src/bin/phpmd">
+            <arg path="${codedir}" />
+            <arg value="xml" />
+            <arg value="${phpmd_ruleset}" />
+            <arg value="--reportfile" />
+            <arg value="${basedir}/build/logs/phpmd.xml" />
+        </exec>
+    </target>
+
+    <target name="phpmd-cli" description="Perform project mess detection using PHPMD.">
+        <exec executable="${basedir}/vendor/xsolve-pl/phpmd/src/bin/phpmd">
+            <arg path="${codedir}" />
+            <arg value="text" />
+            <arg value="${phpmd_ruleset}" />
+        </exec>
+    </target>
+
+    <target name="phpcs" description="Find coding standard violations using PHP_CodeSniffer and create a log file for the CI server.">
+        <exec executable="phpcs">
+            <arg value="--extensions=php" />
+            <arg value="--ignore=Tests/" />
+            <arg value="--report=checkstyle" />
+            <arg value="--report-file=${basedir}/build/logs/symfony2_cs.xml" />
+            <arg value="--standard=${symfony2_cs_ruleset}" />
+            <arg path="${codedir}" />
+        </exec>
+    </target>
+
+    <target name="phpcs-cli" description="Find coding standard violations using PHP_CodeSniffer.">
+        <exec executable="phpcs">
+            <arg value="--extensions=php" />
+            <arg value="--ignore=Tests/" />
+            <arg value="--report=full" />
+            <arg value="--standard=${symfony2_cs_ruleset}" />
+            <arg path="${codedir}" />
+        </exec>
+    </target>
+
+    <target name="phpcpd" description="Find duplicate code using PHPCPD">
+        <exec executable="phpcpd">
+            <arg value="--log-pmd" />
+            <arg value="${basedir}/build/logs/pmd-cpd.xml" />
+            <arg path="${codedir}" />
+        </exec>
+    </target>
+
+    <target name="phpdoc" description="Generate API documentation using PHPDocumentor">
+        <exec executable="phpdoc">
+            <arg value="--directory" />
+            <arg path="${codedir}" />
+            <arg value="--target" />
+            <arg path="${basedir}/build/api" />
+        </exec>
+    </target>
+
+    <target name="phpunit" description="Run unit tests with PHPUnit">
+        <exec executable="phpunit" failonerror="true">
+            <arg value="-c" />
+            <arg path="${basedir}/app" />
+            <arg path="${codedir}/" />
+        </exec>
+    </target>
+
+    <target name="phpcb" description="Aggregate tool output with PHP_CodeBrowser">
+        <exec executable="phpcb">
+            <arg value="--log" />
+            <arg path="${basedir}/build/logs" />
+            <arg value="--source" />
+            <arg path="${codedir}" />
+            <arg value="--output" />
+            <arg path="${basedir}/build/code-browser" />
+        </exec>
+    </target>
+
+    <target name="pull" description="Pull changes from Git repository.">
+        <git command="pull" />
+    </target>
+
+    <target name="can-fix-permissions" description="Check if command fixing permissions as required by Symfony2 can be executed.">
+        <property environment="env" />
+        <condition property="fix-permissions-script-available">
+            <available file="xs-correct-dev-permissions" filepath="${env.PATH}" />
+        </condition>
+    </target>
+
+    <target name="fix-permissions" description="Fix permissions as required by Symfony2." if="fix-permissions-script-available">
+        <echo message="Running xs correct permissions" />
+        <exec executable="xs-correct-dev-permissions">
+            <arg value="${basedir}/app/cache" />
+        </exec>
+        <exec executable="xs-correct-dev-permissions">
+            <arg value="${basedir}/app/logs" />
+        </exec>
+    </target>
+
+    <target name="can-compose" description="Check if composer can be executed.">
+        <property environment="dev" />
+        <condition property="composer-available">
+            <available file="composer" filepath="${env.PATH}" />
+        </condition>
+    </target>
+
+    <target name="compose" description="Run composer to install vendors.">
+        <exec executable="composer" failonerror="true">
+            <arg value="install" />
+        </exec>
+    </target>
+
+    <target name="cache" description="Cleanup cache." depends="can-fix-permissions, fix-permissions">
+        <delete includeemptydirs="true">
+            <fileset dir="${basedir}/app/cache/" includes="**/*"/>
+        </delete>
+    </target>
+
+    <target name="assets" description="Install assets.">
+        <exec executable="${basedir}/app/console" failonerror="true">
+            <arg value="assets:install" />
+            <arg value="--symlink" />
+            <arg value="${basedir}/web" />
+        </exec>
+    </target>
+
+    <target name="assetic" description="Dump Assetic assets for prod environment.">
+        <exec executable="${basedir}/app/console" failonerror="true">
+            <arg value="--env=prod" />
+            <arg value="assetic:dump" />
+        </exec>
+    </target>
+
+    <target name="behat" description="Run Behat tests.">
+        <exec executable="${basedir}/app/console" failonerror="true">
+            <arg value="--env=test" />
+            <arg value="behat" />
+        </exec>
+    </target>
+
+    <target name="fixtures" description="Build database fixtures.">
+        <exec executable="${basedir}/app/console" failonerror="true">
+            <arg value="doctrine:fixtures:load" />
+            <arg value="--purge-with-truncate" />
+        </exec>
+    </target>
+
+    <target name="schema-update" description="Update database schema.">
+        <exec executable="${basedir}/app/console" failonerror="true">
+            <arg value="doctrine:schema:update" />
+            <arg value="--force" />
+        </exec>
+    </target>
+
+    <!-- Complex tasks -->
+
+    <target name="check-env-before-build" description="Check environment before build." depends="check-parameters, can-fix-permissions" />
+    <target name="ci" depends="prepare, copy-parameters, compose, lint, phploc, pdepend, phpmd, phpcs, phpcpd, phpunit" />
+    <target name="cli" depends="phpcs-cli, phpmd-cli" />
+    <target name="build" description="To be used if Git repository is available." depends="check-env-before-build, fix-permissions, compose, cache, assets, assetic" />
+    <target name="build-without-git" description="To be used if Git repository is not available." depends="check-env-before-build, fix-permissions, cache, assets, assetic" />
+    <target name="db-rebuild" depends="schema-update, fixtures" />
+
+</project>

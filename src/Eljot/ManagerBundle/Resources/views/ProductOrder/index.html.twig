@@ -1,0 +1,10 @@
+{% extends 'EljotUserBundle::base.html.twig' %}
+
+{% block content %}
+    <div class="row-fluid">
+        <div class="span12">
+            {% include '::flashes.html.twig' %}
+            {{ grid(grid, 'EljotUserBundle::blocks.html.twig', 'product-order-grid', {}) }}
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets '@EljotUserBundle/Resources/public/css/*' %}
+        <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock stylesheets %}
+
+{% block head_javascripts %}
+    {{ parent() }}
+    {% javascripts '@EljotUserBundle/Resources/public/js/*' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock head_javascripts %}
+
+{% block body %}
+    {% block top %}
+        <div class="page-header">
+            <h1>Babybuu<small>Administration panel</small></h1>
+        </div>
+        {#{% include '::navigation.html.twig' with {'navigation': navigation} %}#}
+    {% endblock top %}
+
+    {% block content %}
+    {% endblock content %}
+
+{% endblock body %}

@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <!-- EMAILMANAGER -->
+        <parameter key="eljot.core.email.email_manager.class">Eljot\CoreBundle\Service\Email\EmailManager</parameter>
+
+        <!-- BEFORECONTROLLERLISTENER -->
+        <parameter key="eljot.core.listener.before_controller.class">Eljot\CoreBundle\Event\BeforeControllerListener</parameter>
+
+        <!-- GRIDBUILDER -->
+        <parameter key="eljot.core.grid.abstract_grid_builder.options" type="collection">
+            <parameter key="limits" type="collection">
+                <parameter>5</parameter>
+                <parameter>10</parameter>
+                <parameter>15</parameter>
+            </parameter>
+            <parameter key="page">1</parameter>
+            <parameter key="row_action_class">btn btn-small</parameter>
+        </parameter>
+
+        <!-- ABSTRACTGRIDBUILDER -->
+        <parameter key="eljot.core.grid.abstract_grid_builder.class">Eljot\CoreBundle\Service\Grid\AbstractGridBuilder</parameter>
+
+        <!-- ABSTRACTGRIDHANDLER -->
+        <parameter key="eljot.core.grid.abstract_action_handler.class">Eljot\CoreBundle\Service\Grid\Action\AbstractGridActionHandler</parameter>
+    </parameters>
+    
+    <services>
+        <!-- EMAILMANAGER -->
+        <service id="eljot.core.email.email_manager" class="%eljot.core.email.email_manager.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="mailer" />
+            <argument type="service" id="router" />
+            <argument type="service" id="templating" />
+            <call method="setSenderEmail">
+                <argument>%sender_email%</argument>
+            </call>
+        </service>
+
+        <!-- ABSTRACTGRIDHANDLER -->
+        <service id="eljot.core.grid.abstract_action_handler" class="%eljot.core.grid.abstract_action_handler.class%" scope="prototype" abstract="true">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
+        <!-- ABSTRACTGRIDBUILDER -->
+        <service id="eljot.core.grid.abstract_grid_builder" class="%eljot.core.grid.abstract_grid_builder.class%" scope="prototype" abstract="true">
+            <argument type="service" id="grid" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%eljot.core.grid.abstract_grid_builder.options%</argument>
+        </service>
+
+        <!-- BEFORECONTROLLERLISTENER -->
+        <service id="eljot.core.listener.before_controller" class="%eljot.core.listener.before_controller.class%" scope="request">
+            <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController"/>
+            <argument type="service" id="service_container"/>
+        </service>
+    </services>
+</container>

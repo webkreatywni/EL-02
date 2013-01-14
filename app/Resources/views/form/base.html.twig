@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="row-fluid offset2">
+        <div class="span8">
+            {% block form_title %}
+            {% endblock form_title %}
+
+            {% include '::flashes.html.twig' %}
+
+            {% block form_inner %}
+            {% endblock form_inner %}
+        </div>
+    </div>
+{% endblock body %}

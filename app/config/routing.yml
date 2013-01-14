@@ -1,0 +1,11 @@
+EljotCoreBundle:
+    resource: "@EljotCoreBundle/Resources/config/routing.xml"
+    prefix:   /
+
+EljotUserBundle:
+    resource: "@EljotUserBundle/Resources/config/routing.xml"
+    prefix:   /
+
+EljotManagerBundle:
+    resource: "@EljotManagerBundle/Resources/config/routing/productorder.xml"
+    prefix:   /order

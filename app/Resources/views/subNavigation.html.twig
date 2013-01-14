@@ -1,0 +1,12 @@
+{% if subNavigation is not null %}
+    <ul class="btn-group">
+        {% for key, value in subNavigation %}
+            {% spaceless %}
+                <a class="btn
+            {% if value.active %}
+                active
+            {% endif %}" href="{{ value.url }}">{{ value.name }}</a>
+            {% endspaceless %}
+        {% endfor %}
+    </ul>
+{% endif %}

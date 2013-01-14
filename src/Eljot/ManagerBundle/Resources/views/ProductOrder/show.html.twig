@@ -1,0 +1,85 @@
+<h1>ProductOrder</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Model</th>
+            <td>{{ entity.model }}</td>
+        </tr>
+        <tr>
+            <th>Invoice</th>
+            <td>{{ entity.invoice }}</td>
+        </tr>
+        <tr>
+            <th>Ebay</th>
+            <td>{{ entity.ebay }}</td>
+        </tr>
+        <tr>
+            <th>Color</th>
+            <td>{{ entity.color }}</td>
+        </tr>
+        <tr>
+            <th>Is_seat</th>
+            <td>{{ entity.isseat }}</td>
+        </tr>
+        <tr>
+            <th>Frame</th>
+            <td>{{ entity.frame }}</td>
+        </tr>
+        <tr>
+            <th>Extra</th>
+            <td>{{ entity.extra }}</td>
+        </tr>
+        <tr>
+            <th>Wheels</th>
+            <td>{{ entity.wheels }}</td>
+        </tr>
+        <tr>
+            <th>Client</th>
+            <td>{{ entity.client }}</td>
+        </tr>
+        <tr>
+            <th>Date_of_receipt</th>
+            <td>{{ entity.dateofreceipt|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Date_of_payment</th>
+            <td>{{ entity.dateofpayment|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Update_time</th>
+            <td>{{ entity.updatetime |date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Insert_time</th>
+            <td>{{ entity.inserttime |date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Ready_to_receipt</th>
+            <td>{{ entity.readytoreceipt }}</td>
+        </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('order') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('order_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('order_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
