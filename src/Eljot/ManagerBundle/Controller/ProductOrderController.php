@@ -4,17 +4,25 @@ namespace Eljot\ManagerBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DependencyInjection\Container;
 
 use APY\DataGridBundle\Grid\Grid;
 use Eljot\ManagerBundle\Entity\ProductOrder;
 use Eljot\ManagerBundle\Form\ProductOrderType;
+use Eljot\CoreBundle\Controller\CoreController;
 
 /**
  * ProductOrder controller.
  *
  */
-class ProductOrderController extends Controller
+class ProductOrderController extends CoreController
 {
+    public function initialize(Request $request, Container $container)
+    {
+        parent::initialize($request, $container);
+        $this->viewData['navigation'] = $container->get('eljot.manager.navigation.manager_navigation_factory')->getNavigation($request);
+    }
+
     /**
      * Lists all ProductOrder entities.
      *
@@ -25,14 +33,13 @@ class ProductOrderController extends Controller
          * @var Grid $grid
          */
         $grid = $this->get('eljot.manager.grid.product_order_grid_builder')->buildGrid($this->getRequest());
-        return $grid->getGridResponse('EljotManagerBundle:ProductOrder:index.html.twig');
+        return $grid->getGridResponse('EljotManagerBundle:ProductOrder:index.html.twig', $this->viewData);
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('EljotManagerBundle:ProductOrder')->findAll();
+        $this->viewData['entities'] = $entities;
 
-        return $this->render('EljotManagerBundle:ProductOrder:index.html.twig', array(
-            'entities' => $entities,
-        ));
+        return $this->render('EljotManagerBundle:ProductOrder:index.html.twig', $this->viewData);
     }
 
     /**
@@ -50,10 +57,10 @@ class ProductOrderController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
+        $this->viewData['entity'] = $entity;
+        $this->viewData['delete_form'] = $deleteForm->createView();
 
-        return $this->render('EljotManagerBundle:ProductOrder:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+        return $this->render('EljotManagerBundle:ProductOrder:show.html.twig', $this->viewData);
     }
 
     /**
@@ -65,10 +72,10 @@ class ProductOrderController extends Controller
         $entity = new ProductOrder();
         $form   = $this->createForm(new ProductOrderType(), $entity);
 
-        return $this->render('EljotManagerBundle:ProductOrder:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        $this->viewData['entity'] = $entity;
+        $this->viewData['form'] = $form->createView();
+
+        return $this->render('EljotManagerBundle:ProductOrder:new.html.twig', $this->viewData);
     }
 
     /**
@@ -89,10 +96,10 @@ class ProductOrderController extends Controller
             return $this->redirect($this->generateUrl('order_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('EljotManagerBundle:ProductOrder:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        $this->viewData['entity'] = $entity;
+        $this->viewData['form'] = $form->createView();
+
+        return $this->render('EljotManagerBundle:ProductOrder:new.html.twig', $this->viewData);
     }
 
     /**
@@ -111,12 +118,11 @@ class ProductOrderController extends Controller
 
         $editForm = $this->createForm(new ProductOrderType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
+        $this->viewData['entity'] = $entity;
+        $this->viewData['edit_form'] = $editForm->createView();
+        $this->viewData['delete_form'] = $deleteForm->createView();
 
-        return $this->render('EljotManagerBundle:ProductOrder:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        return $this->render('EljotManagerBundle:ProductOrder:edit.html.twig', $this->viewData);
     }
 
     /**
@@ -144,11 +150,11 @@ class ProductOrderController extends Controller
             return $this->redirect($this->generateUrl('order_edit', array('id' => $id)));
         }
 
-        return $this->render('EljotManagerBundle:ProductOrder:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        $this->viewData['entity'] = $entity;
+        $this->viewData['edit_form'] = $editForm->createView();
+        $this->viewData['delete_form'] = $deleteForm->createView();
+
+        return $this->render('EljotManagerBundle:ProductOrder:edit.html.twig', $this->viewData);
     }
 
     /**

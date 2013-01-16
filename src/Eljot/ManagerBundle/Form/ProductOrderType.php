@@ -22,10 +22,8 @@ class ProductOrderType extends AbstractType
             ->add('client')
             ->add('dateOfReceipt')
             ->add('dateOfPayment')
-            ->add('updateTime')
-            ->add('insertTime')
-            ->add('readyToReceipt')
-        ;
+            ->add('uniqueCode')
+            ->add('readyToReceipt');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

@@ -10,7 +10,7 @@
                     {% endfor %}
                 </ul>
             {% endif %}
-            <div class="pull-right"><span class="brand" style="font-size: 11px;">{{ 'logged.as' | trans }} <span style="font-weight: bold">{{ app.user.email }}</span></span><a class="btn pull-right" href="{{ path('fos_user_security_logout') }}">{{ 'logout' | trans }}</a></div>
+            {#<div class="pull-right"><span class="brand" style="font-size: 11px;">{{ 'logged.as' | trans }} <span style="font-weight: bold">{{ app.user.email }}</span></span><a class="btn pull-right" href="{{ path('fos_user_security_logout') }}">{{ 'logout' | trans }}</a></div>#}
         </div>
     </div>
 {% endblock navigation %}

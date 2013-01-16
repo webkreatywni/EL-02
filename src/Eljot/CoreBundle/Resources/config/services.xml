@@ -27,6 +27,9 @@
 
         <!-- ABSTRACTGRIDHANDLER -->
         <parameter key="eljot.core.grid.abstract_action_handler.class">Eljot\CoreBundle\Service\Grid\Action\AbstractGridActionHandler</parameter>
+
+        <!-- ABSTRACTNAVIGATIONFACTORY -->
+        <parameter key="eljot.core.navigation.abstract_navigation_factory.class">Eljot\CoreBundle\Service\Navigation\AbstractNavigationFactory</parameter>
     </parameters>
     
     <services>
@@ -57,6 +60,11 @@
         <service id="eljot.core.listener.before_controller" class="%eljot.core.listener.before_controller.class%" scope="request">
             <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController"/>
             <argument type="service" id="service_container"/>
+        </service>
+
+        <!-- ABSTRACTNAVIGATIONFACTORY -->
+        <service id="eljot.core.navigation.abstract_navigation_factory" class="%eljot.core.navigation.abstract_navigation_factory.class%" scope="request" abstract="true">
+            <argument type="service" id="router"/>
         </service>
     </services>
 </container>

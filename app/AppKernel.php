@@ -20,7 +20,8 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+//          "stof/doctrine-extensions-bundle": "dev-master",
+//            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new FOS\UserBundle\FOSUserBundle(),
 //            new JMS\SerializerBundle\JMSSerializerBundle($this),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
@@ -28,7 +29,7 @@ class AppKernel extends Kernel
             new Braincrafted\BootstrapBundle\BraincraftedBootstrapBundle(),
             new Eljot\UserBundle\EljotUserBundle(),
             new Eljot\CoreBundle\EljotCoreBundle(),
-            new APY\DataGridBundle\APYDataGridBundle(),
+            new APY\DataGridBundle\APYDataGridBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

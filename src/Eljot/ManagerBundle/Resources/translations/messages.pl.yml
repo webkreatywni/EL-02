@@ -1,0 +1,20 @@
+label.action.read: Detale
+label.action.update: Edycja
+
+
+product_order.action.new: Utwórz nowe zamówienie
+product_order.action.list: Wszystkie zamówienia
+
+product_order.label.model: Model
+product_order.label.ivoice: Faktura
+product_order.label.ebay: Ebay
+product_order.label.color: Kolor
+product_order.label.isSeat: Fotelik
+product_order.label.frame: Stelaż
+product_order.label.extra: Dodatki
+product_order.label.wheels: Kółka
+product_order.label.client: Klient
+product_order.label.dateOfReceipt: Data odbioru
+product_order.label.dateOfPayment: Data opłacenia
+product_order.label.readyToReceipt: Gotowe do odbioru
+product_order.label.uniqueCode: Nr zamówienia

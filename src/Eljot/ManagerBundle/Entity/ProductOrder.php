@@ -4,6 +4,7 @@ namespace Eljot\ManagerBundle\Entity;
 
 use APY\DataGridBundle\Grid\Mapping as GRID;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Eljot\ManagerBundle\Entity\ProductOrder
@@ -16,11 +17,13 @@ class ProductOrder
     private $id;
 
     /**
+     * @GRID\Column(title="product_order.label.model", type="text", visible=true)
      * @var string $model
      */
     private $model;
 
     /**
+     * @GRID\Column(title="product_order.label.ivoice", type="text", visible=true)
      * @var string $invoice
      */
     private $invoice;
@@ -56,31 +59,37 @@ class ProductOrder
     private $wheels;
 
     /**
+     * @GRID\Column(title="product_order.label.client", type="text", visible=true)
      * @var string $client
      */
     private $client;
 
     /**
+     * @GRID\Column(title="product_order.label.dateOfReceipt", type="date", visible=true, format="Y-m-d")
      * @var date $date_of_receipt
      */
     private $dateOfReceipt;
 
     /**
+     * @GRID\Column(title="product_order.label.dateOfPayment", type="date", visible=true, format="Y-m-d")
      * @var date $date_of_payment
      */
     private $dateOfPayment;
 
     /**
+     * @Gedmo\Timestampable(on="update")
      * @var time $update_time
      */
     private $updateTime;
 
     /**
+     * @Gedmo\Timestampable(on="create")
      * @var time $insert_time
      */
     private $insertTime;
 
     /**
+     * @GRID\Column(title="product_order.label.readyToReceipt", type="boolean", visible=true)
      * @var boolean $ready_to_receipt
      */
     private $readyToReceipt;
@@ -404,7 +413,8 @@ class ProductOrder
         return $this->readyToReceipt;
     }
     /**
-     * @var string $unique_code
+     * @GRID\Column(title="product_order.label.uniqueCode", type="number", visible=true)
+     * @var integer $unique_code
      */
     private $uniqueCode;
 

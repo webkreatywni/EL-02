@@ -21,20 +21,24 @@ class ProductOrderGridBuilder extends AbstractGridBuilder
         $this->grid->addRowAction($updateAction);
         $this->grid->hideColumns(array(
             'id',
-            'model',
-            'invoice',
+//            'model',
+//            'invoice',
             'ebay',
             'color',
             'isSeat',
             'frame',
             'wheels',
             'extra',
-            'client',
-            'dateOfReceipt',
-            'dateOfPayment',
+//            'client',
+//            'dateOfReceipt',
+//            'dateOfPayment',
             'updateTime',
             'insertTime',
+//            'readyToReceipt',
+//            'uniqueCode',
         ));
+
+        $this->grid->getColumn('readyToReceipt');
     }
 
 }

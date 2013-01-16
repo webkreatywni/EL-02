@@ -7,11 +7,18 @@
     <parameters>
         <!-- PRODUCTGRIDHANDLER -->
         <parameter key="eljot.manager.grid.product_order_grid_builder.class">Eljot\ManagerBundle\Service\Grid\ProductOrderGridBuilder</parameter>
+
+        <!-- MANAGERNAVIGATIONFACTORY -->
+        <parameter key="eljot.manager.navigation.manager_navigation_factory.class">Eljot\ManagerBundle\Service\Navigation\ManagerNavigationFactory</parameter>
     </parameters>
 
     <services>
         <!-- PRODUCTGRIDHANDLER -->
         <service id="eljot.manager.grid.product_order_grid_builder" class="%eljot.manager.grid.product_order_grid_builder.class%" scope="prototype" parent="eljot.core.grid.abstract_grid_builder">
+        </service>
+
+        <!-- MANAGERNAVIGATIONFACTORY -->
+        <service id="eljot.manager.navigation.manager_navigation_factory" class="%eljot.manager.navigation.manager_navigation_factory.class%" scope="request" parent="eljot.core.navigation.abstract_navigation_factory">
         </service>
     </services>
 </container>

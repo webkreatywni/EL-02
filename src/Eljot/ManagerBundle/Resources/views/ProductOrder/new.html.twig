@@ -1,20 +1,29 @@
-{% extends '::base.html.twig' %}
+{% extends 'EljotUserBundle::form/base.html.twig' %}
 
-{% block body %}
-<h1>ProductOrder creation</h1>
+{% block form_title %}
+    <h3>{{ 'order.title.create' | trans }}</h3>
+{% endblock form_title %}
 
-<form class="form-horizontal" action="{{ path('order_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
-</form>
+{% block admin_head %}
+    {{ parent() }}
+    {#{% include 'InhouseUserBundle::subNavigation.html.twig' with {'subNavigation': subNavigation} %}#}
+{% endblock admin_head %}
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('order') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
-{% endblock body %}
+{% block form_inner %}
+    <form clas="form-horizontal"  action="{{ path('order_create') }}" method="post" {{ form_enctype(form) }}>
+        <fieldset>
+            {{ form_widget(form, {'form_type' : 'horizontal'}) }}
+            <div class="form-actions">
+                <div class="btn-group">
+                    <button type="submit" class="btn">
+                        {{ 'order.action.create' | trans }}
+                    </button>
+                </div>
+                <br>
+                <a class="btn btn-primary btn-small" href="{{ path('order') }}">
+                    {{ 'label.action.list' | trans }}
+                </a>
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}

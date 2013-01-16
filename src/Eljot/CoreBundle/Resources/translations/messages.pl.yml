@@ -1,0 +1,17 @@
+Reset: Resetuj filtry
+eq: równy
+neq: różny
+like: zawiera
+lt: mniejszy
+lte: mniejszy równy
+gt: większy
+gte: większy równy
+nlike: nie zawiera
+rlike: kończy się na
+llike: zaczyna się od
+isNull: pusty
+isNotNull: niepusty
+btw: pomiędzy
+btwe: pomiędzy i równy
+true: prawda
+false: fałsz

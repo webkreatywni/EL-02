@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: doctrine_extensions.yml }
 
 framework:
     #esi:             ~
@@ -90,12 +91,12 @@ swiftmailer:
     spool:     { type: memory }
 
 # StofDoctrineExtensions
-stof_doctrine_extensions:
-    default_locale: pl
-    orm:
-        default:
-            translatable: false
-            loggable: true
+#stof_doctrine_extensions:
+#    default_locale: pl
+#    orm:
+#        default:
+#            translatable: false
+#            loggable: true
 
 # FOSUserBundle
 fos_user:

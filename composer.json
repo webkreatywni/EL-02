@@ -23,7 +23,6 @@
         "mockery/mockery": "0.7.2",
         "lapistano/proxy-object": "v2.0.1",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
-        "stof/doctrine-extensions-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "v1.3.0",
         "white-october/pagerfanta-bundle": "dev-master",
         "knplabs/knp-menu-bundle": "dev-master",
@@ -35,7 +34,8 @@
         "xsolve-pl/pheanstalk": "dev-autoload-fix",
         "xsolve-pl/phpmd": "dev-master-xsolve",
         "braincrafted/bootstrap-bundle": "dev-master",
-        "apy/datagrid-bundle": "dev-master"
+        "apy/datagrid-bundle": "dev-master",
+        "gedmo/doctrine-extensions":      "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
